@@ -7,5 +7,5 @@ If the item is present, turn the screen green and make a noise.
   2. install jslint
   3. run `coffee -o build/ -cwl src/` from the project directory
 	-l  use the linter
-	Use `coffee -j build/ebaypoller.js -cwl src/`   to compile into one .js
+	Use `coffee -j build/ebaypoller.js -cwl src/main.coffee "src/additional function.coffee"`   to compile into one .js
 
