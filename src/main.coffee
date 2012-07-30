@@ -24,18 +24,22 @@ document.getElementById("search").onclick = () ->
 autoPoll = (timeDelayInSeconds = 600) ->
   console.log "autoPoll1"
   root.setTimeout(autoPoll, timeDelayInSeconds*1000)
-  search getSearchQuery()
+  search()
   console.log "autoPoll2"
 
 
-getSearchQuery = () ->
-  "harry%20potter"
-
 search = () ->
-  url = constructURL()
+  query = getSearchQuery()
+  url = constructURL(query)
   # Build and append the indexed item filters to the url used for the request
   url += buildFilterURL resultsFilter
   submitRequest(url)
+
+
+getSearchQuery = () ->
+  v = document.getElementById("search_query").value
+  alert v
+  return v
 
 # Construct the request URL
 constructURL = (searchQuery = "harry%20potter") ->
@@ -104,4 +108,4 @@ submitRequest = (url) ->
 
 
 #finally set up the autoPoller
-autoPoll 600
+#autoPoll 600

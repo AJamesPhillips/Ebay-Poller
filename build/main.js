@@ -29,19 +29,23 @@
     }
     console.log("autoPoll1");
     root.setTimeout(autoPoll, timeDelayInSeconds * 1000);
-    search(getSearchQuery());
+    search();
     return console.log("autoPoll2");
   };
 
-  getSearchQuery = function() {
-    return "harry%20potter";
-  };
-
   search = function() {
-    var url;
-    url = constructURL();
+    var query, url;
+    query = getSearchQuery();
+    url = constructURL(query);
     url += buildFilterURL(resultsFilter);
     return submitRequest(url);
+  };
+
+  getSearchQuery = function() {
+    var v;
+    v = document.getElementById("search_query").value;
+    alert(v);
+    return v;
   };
 
   constructURL = function(searchQuery) {
@@ -108,7 +112,5 @@
     scriptElement.src = url;
     return document.body.appendChild(scriptElement);
   };
-
-  autoPoll(600);
 
 }).call(this);
