@@ -4,6 +4,4 @@
 
   root = typeof exports !== "undefined" && exports !== null ? exports : this;
 
-  console.log(root.runner + " " + root.runner2() + " " + root.runner3);
-
 }).call(this);

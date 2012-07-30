@@ -50,12 +50,6 @@
 	    url += "&keywords=harry%20potter";
 	    url += "&paginationInput.entriesPerPage=3";
 	    
-	    
-	    // Submit the request
-			scriptElement = document.createElement('script'); // create script element
-			scriptElement.src = url;
-			document.body.appendChild(scriptElement);
-			
 			
 			// Create a JavaScript array of the item filters you want to use in your request
 			resultsFilter = [
@@ -110,7 +104,11 @@
 			// Build and append the indexed item filters to the url used for the request
 			url += buildFilterURL(resultsFilter);
 			
-			
+	    
+	    // Submit the request
+			scriptElement = document.createElement('script'); // create script element
+			scriptElement.src = url;
+			document.body.appendChild(scriptElement);
 		</script>
 	</body>
 </html>

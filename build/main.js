@@ -4,12 +4,4 @@
 
   root = typeof exports !== "undefined" && exports !== null ? exports : this;
 
-  root.runner = "james";
-
-  root.runner2 = function() {
-    return "bob";
-  };
-
-  root.runner3 = "jimbob";
-
 }).call(this);
