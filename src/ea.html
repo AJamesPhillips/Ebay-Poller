@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<!-- completing the tutorial at: 
@@ -76,9 +77,9 @@
 			/* 
 			 * Generates an indexed URL snippet from the array of item filters
 			 * 
-			 * @param resultsFilter {array}  item filters to apply to search results
+			 * @param resultsFilter {array}  item filters to apply to the search results
 			 * 
-			 * @param urlFilter {string}  filters as string to append to search request URL
+			 * @param urlFilter {string}  string, of indexed filters, to append to search request URL
 			 */
 			buildFilterURL = function (resultsFilter) {
 				var urlFilter = "";
@@ -88,7 +89,7 @@
 			    var itemFilter = resultsFilter[i];
 			    // Iterate through each parameter in each item filter
 			    for(var index in itemFilter) {
-			      // Check to see if the paramter has a value (some don't)
+			      // Check to see if the parameter has a value (some don't)
 			      if (itemFilter[index] !== "") {
 			        if (itemFilter[index] instanceof Array) {
 			          for(var r=0; r < itemFilter[index].length; r++) {
@@ -105,6 +106,9 @@
 			  
 			  return urlFilter;
 			}
+			
+			// Build and append the indexed item filters to the url used for the request
+			url += buildFilterURL(resultsFilter);
 			
 			
 		</script>
