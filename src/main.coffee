@@ -19,6 +19,18 @@ root._cb_findItemsByKeywords = (ebayResults) ->
 document.getElementById("search").onclick = () ->
   search()
 
+
+## define autoPoller
+autoPoll = (timeDelayInSeconds = 600) ->
+  console.log "autoPoll1"
+  root.setTimeout(autoPoll, timeDelayInSeconds*1000)
+  search getSearchQuery()
+  console.log "autoPoll2"
+
+
+getSearchQuery = () ->
+  "harry%20potter"
+
 search = () ->
   url = constructURL()
   # Build and append the indexed item filters to the url used for the request
@@ -89,3 +101,7 @@ submitRequest = (url) ->
   scriptElement = document.createElement 'script' # create script element
   scriptElement.src = url
   document.body.appendChild scriptElement
+
+
+#finally set up the autoPoller
+autoPoll 600
