@@ -15,7 +15,8 @@
 			var url = "",
 			    _cb_findItemsByKeywords,
 			    scriptElement,
-			    resultsFilter;
+			    resultsFilter,
+			    buildFilterURL;
 			
 			// Callback function to parse the response and build an HTML table to display search results
 			_cb_findItemsByKeywords = function (root) {
@@ -70,6 +71,42 @@
 			   "paramName":"",
 			   "paramValue":""},
 			];
+			
+			
+			/* 
+			 * Generates an indexed URL snippet from the array of item filters
+			 * 
+			 * @param resultsFilter {array}  item filters to apply to search results
+			 * 
+			 * @param urlFilter {string}  filters as string to append to search request URL
+			 */
+			buildFilterURL = function (resultsFilter) {
+				var urlFilter = "";
+			  // Iterate through each filter in the array
+			  for(var i=0; i<resultsFilter.length; i++) {
+			    //Index each item filter in resultsFilter
+			    var itemFilter = resultsFilter[i];
+			    // Iterate through each parameter in each item filter
+			    for(var index in itemFilter) {
+			      // Check to see if the paramter has a value (some don't)
+			      if (itemFilter[index] !== "") {
+			        if (itemFilter[index] instanceof Array) {
+			          for(var r=0; r < itemFilter[index].length; r++) {
+				          var value = itemFilter[index][r];
+				          urlFilter += "&itemfilter\(" + i + "\)." + index + "\(" + r + "\)=" + value;
+			          }
+			        }
+			        else {
+			          urlFilter += "&itemfilter\(" + i + "\)." + index + "=" + itemFilter[index];
+			        }
+			      }
+			    }
+			  }
+			  
+			  return urlFilter;
+			}
+			
+			
 		</script>
 	</body>
 </html>
