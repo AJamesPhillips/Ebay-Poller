@@ -15,20 +15,31 @@ root._cb_findItemsByKeywords = (ebayResults) ->
   document.getElementById("results").innerHTML = html.join("")
 
 
-# Construct the request URL
-url = "
-http://svcs.ebay.com/services/search/FindingService/v1
-?OPERATION-NAME=findItemsByKeywords
-&SERVICE-VERSION=1.0.0
-&SECURITY-APPNAME=Jf8f7d060-1456-4fa9-bfc6-ec5d2e1c822
-&GLOBAL-ID=EBAY-US
-&RESPONSE-DATA-FORMAT=JSON
-&callback=_cb_findItemsByKeywords
-&REST-PAYLOAD
-&keywords=harry%20potter
-&paginationInput.entriesPerPage=3
-"
+#attach event listener to search button
+document.getElementById("search").onclick = () ->
+  search()
 
+search = () ->
+  url = constructURL()
+  # Build and append the indexed item filters to the url used for the request
+  url += buildFilterURL resultsFilter
+  submitRequest(url)
+
+# Construct the request URL
+constructURL = (searchQuery = "harry%20potter") ->
+  """
+  http://svcs.ebay.com/services/search/FindingService/v1
+  ?OPERATION-NAME=findItemsByKeywords
+  &SERVICE-VERSION=1.0.0
+  &SECURITY-APPNAME=Jf8f7d060-1456-4fa9-bfc6-ec5d2e1c822
+  &GLOBAL-ID=EBAY-US
+  &RESPONSE-DATA-FORMAT=JSON
+  &callback=_cb_findItemsByKeywords
+  &REST-PAYLOAD
+  &keywords=#{searchQuery}
+  &paginationInput.entriesPerPage=3
+  """
+  
 
 # Create a JavaScript array of the item filters you : "nt to use in your request
 resultsFilter = [
@@ -73,11 +84,8 @@ buildFilterURL = (resultsFilter) ->
   return urlFilter
 
 
-# Build and append the indexed item filters to the url used for the request
-url += buildFilterURL resultsFilter
-
-
 # Submit the request
-scriptElement = document.createElement 'script' # create script element
-scriptElement.src = url
-document.body.appendChild scriptElement
+submitRequest = (url) ->
+  scriptElement = document.createElement 'script' # create script element
+  scriptElement.src = url
+  document.body.appendChild scriptElement
