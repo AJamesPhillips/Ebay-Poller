@@ -14,7 +14,8 @@
 		<script>
 			var url = "",
 			    _cb_findItemsByKeywords,
-			    scriptElement;
+			    scriptElement,
+			    resultsFilter;
 			
 			// Callback function to parse the response and build an HTML table to display search results
 			_cb_findItemsByKeywords = function (root) {
@@ -52,6 +53,23 @@
 			scriptElement = document.createElement('script'); // create script element
 			scriptElement.src = url;
 			document.body.appendChild(scriptElement);
+			
+			
+			// Create a JavaScript array of the item filters you want to use in your request
+			resultsFilter = [
+			  {"name":"MaxPrice",
+			   "value":"25",
+			   "paramName":"Currency",
+			   "paramValue":"USD"},
+			  {"name":"FreeShippingOnly",
+			   "value":"true",
+			   "paramName":"",
+			   "paramValue":""},
+			  {"name":"ListingType",
+			   "value":["AuctionWithBIN", "FixedPrice", "StoreInventory"],
+			   "paramName":"",
+			   "paramValue":""},
+			];
 		</script>
 	</body>
 </html>
