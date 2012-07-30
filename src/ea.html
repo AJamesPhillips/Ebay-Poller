@@ -13,7 +13,8 @@
 		
 		<script>
 			var url = "",
-			    _cb_findItemsByKeywords;
+			    _cb_findItemsByKeywords,
+			    scriptElement;
 			
 			// Callback function to parse the response and build an HTML table to display search results
 			_cb_findItemsByKeywords = function (root) {
@@ -33,7 +34,7 @@
 				document.getElementById("results").innerHTML = html.join("");
 			};
 
-			
+
 			// Construct the request URL
 			url += "http://svcs.ebay.com/services/search/FindingService/v1";
 	    url += "?OPERATION-NAME=findItemsByKeywords";
@@ -45,6 +46,12 @@
 	    url += "&REST-PAYLOAD";
 	    url += "&keywords=harry%20potter";
 	    url += "&paginationInput.entriesPerPage=3";
+	    
+	    
+	    // Submit the request
+			scriptElement = document.createElement('script'); // create script element
+			scriptElement.src = url;
+			document.body.appendChild(scriptElement);
 		</script>
 	</body>
 </html>
