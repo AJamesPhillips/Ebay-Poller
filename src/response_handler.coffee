@@ -31,7 +31,7 @@ root.EBP.updateItemPresenceStatus = (itemPresent) ->
   
 
 root.EBP.makeANoise = ->
-  audioElement = document.getElementById('beep1'); 
+  audioElement = document.getElementById('noise'); 
   audioElement.play();
 
 

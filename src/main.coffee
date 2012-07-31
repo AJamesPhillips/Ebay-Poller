@@ -17,7 +17,9 @@ search = () ->
   query = getSearchQuery()
   url = constructURL(query)
   # Build and append the indexed item filters to the url used for the request
+  ###
   url += buildFilterURL resultsFilter
+  ###
   submitRequest(url)
 
 
@@ -35,7 +37,7 @@ constructURL = (searchQuery = "harry%20potter") ->
   ?OPERATION-NAME=findItemsByKeywords
   &SERVICE-VERSION=1.0.0
   &SECURITY-APPNAME=Jf8f7d060-1456-4fa9-bfc6-ec5d2e1c822
-  &GLOBAL-ID=EBAY-US
+  &GLOBAL-ID=EBAY-GB
   &RESPONSE-DATA-FORMAT=JSON
   &callback=EBP._cb_findItemsByKeywords
   &REST-PAYLOAD

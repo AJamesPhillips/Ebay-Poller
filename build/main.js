@@ -21,7 +21,10 @@
     var query, url;
     query = getSearchQuery();
     url = constructURL(query);
-    url += buildFilterURL(resultsFilter);
+    /*
+      url += buildFilterURL resultsFilter
+    */
+
     return submitRequest(url);
   };
 
@@ -36,7 +39,7 @@
     if (searchQuery == null) {
       searchQuery = "harry%20potter";
     }
-    return "http://svcs.ebay.com/services/search/FindingService/v1\n?OPERATION-NAME=findItemsByKeywords\n&SERVICE-VERSION=1.0.0\n&SECURITY-APPNAME=Jf8f7d060-1456-4fa9-bfc6-ec5d2e1c822\n&GLOBAL-ID=EBAY-US\n&RESPONSE-DATA-FORMAT=JSON\n&callback=EBP._cb_findItemsByKeywords\n&REST-PAYLOAD\n&keywords=" + searchQuery + "\n&paginationInput.entriesPerPage=3";
+    return "http://svcs.ebay.com/services/search/FindingService/v1\n?OPERATION-NAME=findItemsByKeywords\n&SERVICE-VERSION=1.0.0\n&SECURITY-APPNAME=Jf8f7d060-1456-4fa9-bfc6-ec5d2e1c822\n&GLOBAL-ID=EBAY-GB\n&RESPONSE-DATA-FORMAT=JSON\n&callback=EBP._cb_findItemsByKeywords\n&REST-PAYLOAD\n&keywords=" + searchQuery + "\n&paginationInput.entriesPerPage=3";
   };
 
   resultsFilter = [

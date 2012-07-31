@@ -35,7 +35,7 @@
 
   root.EBP.makeANoise = function() {
     var audioElement;
-    audioElement = document.getElementById('beep1');
+    audioElement = document.getElementById('noise');
     return audioElement.play();
   };
 
