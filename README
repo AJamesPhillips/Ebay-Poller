@@ -1,5 +1,8 @@
-run this as a bookmarklet or as a local webpage to poll ebay to see if it has an item.
+Open this as a local webpage to poll ebay to see if it has an item.
 If the item is present, turn the screen green and make a noise.
+Note, this is using an ebay developer APP-ID limited to 5000 
+requests per day in total.  IF it does not work, it may be that 
+someone else is using it.
 
 
 ## compiling a new version of the javascript from the coffeescript (correct as of 2012-07-28):
