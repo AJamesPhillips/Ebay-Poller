@@ -41,6 +41,7 @@ getSearchQuery = () ->
   alert v
   return v
 
+
 # Construct the request URL
 constructURL = (searchQuery = "harry%20potter") ->
   """
