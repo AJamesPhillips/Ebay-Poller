@@ -30,6 +30,7 @@ getSearchQuery = () ->
 
 # Construct the request URL
 constructURL = (searchQuery = "harry%20potter") ->
+  ## @TODO do we need to call escaoe or encodeURI on the searchQuery
   """
   http://svcs.ebay.com/services/search/FindingService/v1
   ?OPERATION-NAME=findItemsByKeywords
@@ -37,7 +38,7 @@ constructURL = (searchQuery = "harry%20potter") ->
   &SECURITY-APPNAME=Jf8f7d060-1456-4fa9-bfc6-ec5d2e1c822
   &GLOBAL-ID=EBAY-US
   &RESPONSE-DATA-FORMAT=JSON
-  &callback=_cb_findItemsByKeywords
+  &callback=EBP._cb_findItemsByKeywords
   &REST-PAYLOAD
   &keywords=#{searchQuery}
   &paginationInput.entriesPerPage=3

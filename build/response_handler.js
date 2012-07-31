@@ -4,7 +4,9 @@
 
   root = typeof exports !== "undefined" && exports !== null ? exports : this;
 
-  root._cb_findItemsByKeywords = function(ebayResults) {
+  root.EBP = {};
+
+  root.EBP._cb_findItemsByKeywords = function(ebayResults) {
     var html, item, items, _i, _len;
     items = ebayResults.findItemsByKeywordsResponse[0].searchResult[0].item || [];
     html = [];

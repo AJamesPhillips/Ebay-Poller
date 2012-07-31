@@ -1,7 +1,10 @@
 root = exports ? this
 
+#declare the global name space 
+root.EBP = {}
+
 # Callback function to parse the response and build an HTML table to display search results
-root._cb_findItemsByKeywords = (ebayResults) ->
+root.EBP._cb_findItemsByKeywords = (ebayResults) ->
   items = ebayResults.findItemsByKeywordsResponse[0].searchResult[0].item || []
   html = []
   
