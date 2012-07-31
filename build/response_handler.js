@@ -14,11 +14,26 @@
     for (_i = 0, _len = items.length; _i < _len; _i++) {
       item = items[_i];
       if ((item.title != null) && (item.viewItemURL != null)) {
+        EBP.makeABeep();
         html.push('<tr><td>' + '<img src="' + item.galleryURL + '" border="0">' + '</td>' + '<td><a href="' + item.viewItemURL + '" target="_blank">' + item.title + '</a></td></tr>');
       }
     }
     html.push('</tbody></table>');
     return document.getElementById("results").innerHTML = html.join("");
   };
+
+  root.EBP.makeABeep = function() {
+    var audioElement;
+    audioElement = document.getElementById('beep1');
+    return audioElement.play();
+  };
+
+  /*
+    beep = new Audio '../sounds/beep1.mp3'
+    beep = new Audio '../sounds/beep2.mp3'
+    beep = new Audio '../sounds/beep3.mp3'
+    beep = new Audio '../sounds/beep4.mp3'
+  */
+
 
 }).call(this);

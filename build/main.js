@@ -97,6 +97,4 @@
     return document.body.appendChild(scriptElement);
   };
 
-  autoPoll(600);
-
 }).call(this);

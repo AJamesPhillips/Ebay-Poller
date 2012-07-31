@@ -95,4 +95,4 @@ submitRequest = (url) ->
 
 
 #finally set up the autoPoller
-autoPoll 600
+#autoPoll 600

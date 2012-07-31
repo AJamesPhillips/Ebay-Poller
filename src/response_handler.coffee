@@ -11,8 +11,27 @@ root.EBP._cb_findItemsByKeywords = (ebayResults) ->
   html.push('<table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody>')
   for item in items
     if item.title? and item.viewItemURL?
+      EBP.makeABeep()
       html.push('<tr><td>' + '<img src="' + item.galleryURL + '" border="0">' + '</td>' +
       '<td><a href="' + item.viewItemURL + '" target="_blank">' + item.title + '</a></td></tr>')
   
   html.push('</tbody></table>');
   document.getElementById("results").innerHTML = html.join("")
+  
+  
+
+root.EBP.makeABeep = ->
+  audioElement = document.getElementById('beep1'); 
+  audioElement.play();
+
+   
+  #beep = root.document.getElementById("beep1");
+###
+  beep = new Audio '../sounds/beep1.mp3'
+  beep = new Audio '../sounds/beep2.mp3'
+  beep = new Audio '../sounds/beep3.mp3'
+  beep = new Audio '../sounds/beep4.mp3'
+###
+  #beep.load()
+  #beep.autoplay = false
+  #beep.play()
