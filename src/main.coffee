@@ -8,10 +8,9 @@ document.getElementById("search").onclick = () ->
 
 ## define autoPoller
 autoPoll = (timeDelayInSeconds = 600) ->
-  console.log "autoPoll1"
-  root.setTimeout(autoPoll, timeDelayInSeconds*1000)
+  console.log "autoPoll"
+  root.setTimeout(autoPoll, timeDelayInSeconds*1000, timeDelayInSeconds)
   search()
-  console.log "autoPoll2"
 
 
 search = () ->
@@ -96,4 +95,4 @@ submitRequest = (url) ->
 
 
 #finally set up the autoPoller
-#autoPoll 600
+autoPoll 600

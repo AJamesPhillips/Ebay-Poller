@@ -12,10 +12,9 @@
     if (timeDelayInSeconds == null) {
       timeDelayInSeconds = 600;
     }
-    console.log("autoPoll1");
-    root.setTimeout(autoPoll, timeDelayInSeconds * 1000);
-    search();
-    return console.log("autoPoll2");
+    console.log("autoPoll");
+    root.setTimeout(autoPoll, timeDelayInSeconds * 1000, timeDelayInSeconds);
+    return search();
   };
 
   search = function() {
@@ -97,5 +96,7 @@
     scriptElement.src = url;
     return document.body.appendChild(scriptElement);
   };
+
+  autoPoll(600);
 
 }).call(this);
