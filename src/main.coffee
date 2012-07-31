@@ -94,5 +94,5 @@ submitRequest = (url) ->
   document.body.appendChild scriptElement
 
 
-#finally set up the autoPoller
-#autoPoll 600
+#finally set up the autoPoller for every 600 seconds = 10 minutes
+autoPoll 600

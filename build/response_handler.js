@@ -7,33 +7,46 @@
   root.EBP = {};
 
   root.EBP._cb_findItemsByKeywords = function(ebayResults) {
-    var html, item, items, _i, _len;
+    var html, item, itemPresent, items, _i, _len;
     items = ebayResults.findItemsByKeywordsResponse[0].searchResult[0].item || [];
     html = [];
+    itemPresent = false;
     html.push('<table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody>');
     for (_i = 0, _len = items.length; _i < _len; _i++) {
       item = items[_i];
       if ((item.title != null) && (item.viewItemURL != null)) {
-        EBP.makeABeep();
+        itemPresent = true;
         html.push('<tr><td>' + '<img src="' + item.galleryURL + '" border="0">' + '</td>' + '<td><a href="' + item.viewItemURL + '" target="_blank">' + item.title + '</a></td></tr>');
       }
     }
     html.push('</tbody></table>');
-    return document.getElementById("results").innerHTML = html.join("");
+    document.getElementById("results").innerHTML = html.join("");
+    return EBP.updateItemPresenceStatus(itemPresent);
   };
 
-  root.EBP.makeABeep = function() {
+  root.EBP.updateItemPresenceStatus = function(itemPresent) {
+    if (itemPresent) {
+      EBP.makeANoise();
+      return EBP.changeBackGroundColour(true);
+    } else {
+      return EBP.changeBackGroundColour(false);
+    }
+  };
+
+  root.EBP.makeANoise = function() {
     var audioElement;
     audioElement = document.getElementById('beep1');
     return audioElement.play();
   };
 
-  /*
-    beep = new Audio '../sounds/beep1.mp3'
-    beep = new Audio '../sounds/beep2.mp3'
-    beep = new Audio '../sounds/beep3.mp3'
-    beep = new Audio '../sounds/beep4.mp3'
-  */
-
+  root.EBP.changeBackGroundColour = function(success) {
+    var cssClass;
+    if (success) {
+      cssClass = "itemPresent";
+    } else {
+      cssClass = "itemAbsent";
+    }
+    return root.document.getElementsByTagName('body')[0].className = cssClass;
+  };
 
 }).call(this);

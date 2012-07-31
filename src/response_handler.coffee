@@ -7,31 +7,39 @@ root.EBP = {}
 root.EBP._cb_findItemsByKeywords = (ebayResults) ->
   items = ebayResults.findItemsByKeywordsResponse[0].searchResult[0].item || []
   html = []
+  itemPresent = false
   
   html.push('<table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody>')
   for item in items
     if item.title? and item.viewItemURL?
-      EBP.makeABeep()
+      itemPresent = true
       html.push('<tr><td>' + '<img src="' + item.galleryURL + '" border="0">' + '</td>' +
       '<td><a href="' + item.viewItemURL + '" target="_blank">' + item.title + '</a></td></tr>')
   
   html.push('</tbody></table>');
   document.getElementById("results").innerHTML = html.join("")
   
+  EBP.updateItemPresenceStatus(itemPresent)
   
 
-root.EBP.makeABeep = ->
+root.EBP.updateItemPresenceStatus = (itemPresent) ->
+  if itemPresent
+    EBP.makeANoise()
+    EBP.changeBackGroundColour(true)
+  else
+    EBP.changeBackGroundColour(false)
+  
+
+root.EBP.makeANoise = ->
   audioElement = document.getElementById('beep1'); 
   audioElement.play();
 
-   
-  #beep = root.document.getElementById("beep1");
-###
-  beep = new Audio '../sounds/beep1.mp3'
-  beep = new Audio '../sounds/beep2.mp3'
-  beep = new Audio '../sounds/beep3.mp3'
-  beep = new Audio '../sounds/beep4.mp3'
-###
-  #beep.load()
-  #beep.autoplay = false
-  #beep.play()
+
+root.EBP.changeBackGroundColour = (success) ->
+  
+  if success
+    cssClass = "itemPresent"
+  else
+    cssClass = "itemAbsent"
+  
+  root.document.getElementsByTagName('body')[0].className = cssClass

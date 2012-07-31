@@ -1,0 +1,7 @@
+body.itemPresent {
+	background: #44ff44;
+}
+
+body.itemAbsent {
+	background: #ff4444;
+}
