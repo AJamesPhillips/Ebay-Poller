@@ -1,13 +1,23 @@
 root = exports ? this
 
 
-#attach event listener to search button
+# attach event listeners
 document.getElementById('search').onclick = ->
   search()
 
+document.getElementById('clear-results').onclick = ->
+  clearResults()
+
 
 ## define autoPoller
-autoPoll = (timeDelayInSeconds = 600, timeTillNextSearch = 0) ->
+autoPoll = (timeDelayInSeconds, timeTillNextSearch = 0) ->
+  if timeDelayInSeconds == undefined
+    timeDelayInSeconds = parseInt(document.getElementById('poll-delay').value, 10)
+    if not timeDelayInSeconds
+      # if no value given to parseInt then it will return NaN which is falsy
+      timeDelayInSeconds = 600
+    if timeDelayInSeconds < 100
+      timeDelayInSeconds = 100
   if timeTillNextSearch <= 0
     console.log 'autoPoll searching'
     search()
@@ -24,8 +34,8 @@ autoPoll = (timeDelayInSeconds = 600, timeTillNextSearch = 0) ->
 
 
 search = ->
-  query = getSearchQuery()
-  url = constructURL(query)
+  window.query = getSearchQuery()
+  url = constructURL(window.query)
   # Build and append the indexed item filters to the url used for the request
   # url += buildFilterURL resultsFilter
   submitRequest(url)
@@ -97,11 +107,14 @@ buildFilterURL = (resultsFilter) ->
   return urlFilter
 
 
-# Submit the request
 submitRequest = (url) ->
   scriptElement = document.createElement 'script' # create script element
   scriptElement.src = url
   document.body.appendChild scriptElement
+
+
+clearResults = ->
+  document.getElementById('results').innerHTML = ''
 
 
 # finally set up the autoPoller

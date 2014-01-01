@@ -5,3 +5,7 @@ body.itemPresent {
 body.itemAbsent {
 	background: #ff4444;
 }
+
+#search-query {
+  width: 300px;
+}

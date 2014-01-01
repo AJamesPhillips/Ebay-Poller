@@ -12,7 +12,7 @@
     html = [];
     itemPresent = false;
     datetime = (new Date()).toUTCString();
-    html.push("Results retrieved on " + datetime);
+    html.push("Results for \"" + window.query + "\" retrieved on " + datetime);
     html.push('<table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody>');
     for (_i = 0, _len = items.length; _i < _len; _i++) {
       item = items[_i];
