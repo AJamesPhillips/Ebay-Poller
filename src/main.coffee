@@ -2,18 +2,28 @@ root = exports ? this
 
 
 #attach event listener to search button
-document.getElementById("search").onclick = () ->
+document.getElementById('search').onclick = ->
   search()
 
 
 ## define autoPoller
-autoPoll = (timeDelayInSeconds = 600) ->
-  console.log "autoPoll"
-  root.setTimeout(autoPoll, timeDelayInSeconds*1000, timeDelayInSeconds)
-  search()
+autoPoll = (timeDelayInSeconds = 600, timeTillNextSearch = 0) ->
+  if timeTillNextSearch <= 0
+    console.log 'autoPoll searching'
+    search()
+    timeTillNextSearch = timeDelayInSeconds
+  else
+    timeTillNextSearch -= 1
+    seconds = timeTillNextSearch % 60
+    seconds = "#{seconds} seconds"
+    mins = Math.floor(timeTillNextSearch / 60)
+    mins = if mins then "#{mins} minutes " else ""
+    msg = "#{mins}#{seconds}"
+    document.getElementById('poll-times').innerHTML = msg
+  root.setTimeout(autoPoll, 1000, timeDelayInSeconds, timeTillNextSearch)
 
 
-search = () ->
+search = ->
   query = getSearchQuery()
   url = constructURL(query)
   # Build and append the indexed item filters to the url used for the request
@@ -23,8 +33,8 @@ search = () ->
   submitRequest(url)
 
 
-getSearchQuery = () ->
-  searchQueryValue = document.getElementById("search_query").value
+getSearchQuery = ->
+  searchQueryValue = document.getElementById('search-query').value
   console.log "Searching for #{searchQueryValue}"
   return searchQueryValue
 
@@ -44,7 +54,7 @@ constructURL = (searchQuery = "harry%20potter") ->
   &keywords=#{searchQuery}
   &paginationInput.entriesPerPage=3
   """
-  
+
 
 # Create a JavaScript array of the item filters you : "nt to use in your request
 resultsFilter = [
@@ -65,13 +75,10 @@ resultsFilter = [
 ]
 
 
-### 
- * Generates an indexed URL snippet from the array of item filters
- * 
- * @param resultsFilter {array}  item filters to apply to the search results
- * 
- * @param urlFilter {string}  string, of indexed filters, to append to search request URL
-###
+
+# Generates an indexed URL snippet from the array of item filters
+# @param resultsFilter {array}  item filters to apply to the search results
+# @param urlFilter {string}  string, of indexed filters, to append to search request URL
 buildFilterURL = (resultsFilter) ->
   urlFilter = ""
   # Iterate through each filter in the array
@@ -85,7 +92,7 @@ buildFilterURL = (resultsFilter) ->
             urlFilter += "&itemfilter\(#{i}\).#{index}\(#{r}\)=#{value}"
         else
           urlFilter += "&itemfilter\(#{i}\).#{index}=#{itemFilter[index]}"
-          
+
   return urlFilter
 
 
@@ -96,5 +103,5 @@ submitRequest = (url) ->
   document.body.appendChild scriptElement
 
 
-#finally set up the autoPoller for every 600 seconds = 10 minutes
+# finally set up the autoPoller for every 600 seconds = 10 minutes
 autoPoll 600

@@ -13,7 +13,7 @@ someone else is using it.  Sign up for your own at the ebay developer site.
 
 
 Note 2: compiling a new version of the javascript from the
-coffeescript (correct as of 2012-07-28):
+coffeescript:
   1. Install Coffeescript
   2. install jslint
   3. run `coffee -o public/javascript/ -cwl src/` from the project directory
