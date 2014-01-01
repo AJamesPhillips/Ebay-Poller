@@ -4,13 +4,15 @@
 
   root = typeof exports !== "undefined" && exports !== null ? exports : this;
 
-  root.EBP = {};
+  root.EBayPoller = {};
 
-  root.EBP._cb_findItemsByKeywords = function(ebayResults) {
-    var html, item, itemPresent, items, _i, _len;
+  root.EBayPoller.callback = function(ebayResults) {
+    var datetime, html, item, itemPresent, items, resultEl, _i, _len;
     items = ebayResults.findItemsByKeywordsResponse[0].searchResult[0].item || [];
     html = [];
     itemPresent = false;
+    datetime = (new Date()).toUTCString();
+    html.push("Results retrieved on " + datetime);
     html.push('<table width="100%" border="0" cellspacing="0" cellpadding="3"><tbody>');
     for (_i = 0, _len = items.length; _i < _len; _i++) {
       item = items[_i];
@@ -19,27 +21,28 @@
         html.push('<tr><td>' + '<img src="' + item.galleryURL + '" border="0">' + '</td>' + '<td><a href="' + item.viewItemURL + '" target="_blank">' + item.title + '</a></td></tr>');
       }
     }
-    html.push('</tbody></table>');
-    document.getElementById("results").innerHTML = html.join("");
-    return EBP.updateItemPresenceStatus(itemPresent);
+    html.push('</tbody></table><hr>');
+    resultEl = document.getElementById('results');
+    resultEl.innerHTML = html.join('') + resultEl.innerHTML;
+    return EBayPoller.updateItemPresenceStatus(itemPresent);
   };
 
-  root.EBP.updateItemPresenceStatus = function(itemPresent) {
+  root.EBayPoller.updateItemPresenceStatus = function(itemPresent) {
     if (itemPresent) {
-      EBP.makeANoise();
-      return EBP.changeBackGroundColour(true);
+      EBayPoller.makeANoise();
+      return EBayPoller.changeBackGroundColour(true);
     } else {
-      return EBP.changeBackGroundColour(false);
+      return EBayPoller.changeBackGroundColour(false);
     }
   };
 
-  root.EBP.makeANoise = function() {
+  root.EBayPoller.makeANoise = function() {
     var audioElement;
     audioElement = document.getElementById('noise');
     return audioElement.play();
   };
 
-  root.EBP.changeBackGroundColour = function(success) {
+  root.EBayPoller.changeBackGroundColour = function(success) {
     var cssClass;
     if (success) {
       cssClass = "itemPresent";

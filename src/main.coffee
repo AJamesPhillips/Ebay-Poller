@@ -27,9 +27,7 @@ search = ->
   query = getSearchQuery()
   url = constructURL(query)
   # Build and append the indexed item filters to the url used for the request
-  ###
-  url += buildFilterURL resultsFilter
-  ###
+  # url += buildFilterURL resultsFilter
   submitRequest(url)
 
 
@@ -49,31 +47,34 @@ constructURL = (searchQuery = "harry%20potter") ->
   &SECURITY-APPNAME=Jf8f7d060-1456-4fa9-bfc6-ec5d2e1c822
   &GLOBAL-ID=EBAY-GB
   &RESPONSE-DATA-FORMAT=JSON
-  &callback=EBP._cb_findItemsByKeywords
+  &callback=EBayPoller.callback
   &REST-PAYLOAD
   &keywords=#{searchQuery}
   &paginationInput.entriesPerPage=3
   """
 
 
-# Create a JavaScript array of the item filters you : "nt to use in your request
+# Create a JavaScript array of the item filters you want to use in your request
 resultsFilter = [
-  name: "MaxPrice"
-  value: "25"
-  paramName: "Currency"
-  paramValue: "U"
   {
-  name: "FreeShippingOnly"
-  value: "true"
-  paramName: ""
-  paramValue: ""}
+    name: "MaxPrice"
+    value: "25"
+    paramName: "Currency"
+    paramValue: "U"
+  }
   {
-  name: "ListingType"
-  value: ["AuctionWithBIN", "FixedPrice", "StoreInventory"]
-  paramName: ""
-  paramValue: ""}
+    name: "FreeShippingOnly"
+    value: "true"
+    paramName: ""
+    paramValue: ""
+  }
+  {
+    name: "ListingType"
+    value: ["AuctionWithBIN", "FixedPrice", "StoreInventory"]
+    paramName: ""
+    paramValue: ""
+  }
 ]
-
 
 
 # Generates an indexed URL snippet from the array of item filters
@@ -103,5 +104,5 @@ submitRequest = (url) ->
   document.body.appendChild scriptElement
 
 
-# finally set up the autoPoller for every 600 seconds = 10 minutes
-autoPoll 600
+# finally set up the autoPoller
+autoPoll()

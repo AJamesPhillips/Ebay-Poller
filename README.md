@@ -16,12 +16,11 @@ Note 2: compiling a new version of the javascript from the
 coffeescript:
   1. Install Coffeescript
   2. install jslint
-  3. run `coffee -o public/javascript/ -cwl src/` from the project directory
+  3. run `coffee -o public/javascript/ -cw src/` from the project directory
 	-l  use the linter
-	Use `coffee -j public/javascript/ebaypoller.js -cwl src/main.coffee "src/additional function.coffee"`   to compile into one .js
 
 
 **Use of Apple mobile and unplugged devices**
-Apple's Safari may stop the setTimeout function from working so this would
-unfortunately stop the automatic polling of ebay from running in the background
-if your device is unplugged.
+Apple's Safari may stop the setTimeout function from working so this would stop
+the automatic polling of ebay from running in the background if your device is
+unplugged.
